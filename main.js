@@ -6,43 +6,48 @@ var buildList = {
 	folderName: 'parent-folder', // This will create an index file by default
 	filesArray: ['index', 'about-us', 'surgeons', 'contact', 'specials'], // file names will be given the templates file extension
 	template: 'template.cshtml', // include directory and extension
-	destinationDir: 'static/' // WARNING: this will overwrite files that exist 
+	destinationDir: 'static/' // WARNING: this will overwrite files that exist
 };
 
+generateFiles(buildList);
 
-fileArrayLoop(buildList.filesArray, buildFile);
-
-
-function buildFile(fileName){
+function generateFiles(obj){
 	
-	var folderName = buildList.folderName;
+	fileArrayLoop(obj.filesArray, buildFile);
 	
-	var dest = buildList.destinationDir;
-	var template = buildList.template;
-	var extension = '.' + template.split('.')[1]; 
+	function buildFile(fileName){
 	
-	var newFile = dest + fileName + extension;
+		var folderName = obj.folderName;
 	
-	// template, directory + filename;
-	fs.copy(template, newFile, function(err){
-		if(err) console.error(err);
-		
-		console.log('File generated: ' + fileName + extension);
-	});
-}
-
-
-// Need to: loop over file names and be able to call a function on that file
-function fileArrayLoop(arr, func){
-	if(!Array.isArray(arr)){ return; }
+		var dest = obj.destinationDir;
+		var template = obj.template;
+		var extension = '.' + template.split('.')[1];
 	
-	var arrayContainsIndex = arr.indexOf('index') > -1;
+		var newFile = dest + fileName + extension;
 	
-	if(!arrayContainsIndex){
-		arr.push('index');
+		// template, directory + filename;
+		fs.copy(template, newFile, function(err){
+			if(err)  { 
+				console.error(err); 
+			} else {
+				console.log('File generated: ' + fileName + extension);
+			}
+		});
 	}
 	
-	for(var i = 0; i < arr.length; i++){
-		func(arr[i]); // will run function with string of file name passed to it
+	
+	// Need to: loop over file names and be able to call a function on that file
+	function fileArrayLoop(arr, func){
+		if(!Array.isArray(arr)){ return; }
+	
+		var arrayContainsIndex = arr.indexOf('index') > -1;
+	
+		if(!arrayContainsIndex){
+			arr.push('index');
+		}
+	
+		for(var i = 0; i < arr.length; i++){
+			func(arr[i]); // will run function with string of file name passed to it
+		}
 	}
 }
