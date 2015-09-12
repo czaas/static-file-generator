@@ -1,0 +1,11 @@
+<html><head><meta charset="UTF-8"><title>File Generator</title><link rel="stylesheet" href="/lib/pure-min.css"><link rel="stylesheet" href="/css/main.css"></head><body><div class="contentContainer" class="pure-g"><div class="pure-u-1-2"><form action="/" id="file-generator" class="pure-form pure-form-stacked pure-1-2"><input type="text" placeholder="Folder Name" name="folderName" class="pure-input-1"> <input type="text" placeholder="File names separated by a comma" class="pure-input-1"> <input type="text" placeholder="Desitnation where the folder will go" class="pure-input-1"> <input type="text" placeholder="Teamplate" class="pure-input-1"> <button>Generat Files</button></form></div></div><script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script><script>var _form = $('#file-generator'); 
+		_form.submit(function(e){
+			e.preventDefault();
+			
+			var obj = {};
+			obj.folderName = _form.folderName;
+			
+			console.log(_form);
+			
+			//console.log('Submited!');
+		})</script></body></html>
