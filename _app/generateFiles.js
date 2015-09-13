@@ -9,7 +9,7 @@ var buildList = {
 	destinationDir: 'static/' // WARNING: this will overwrite files that exist
 };
 
-generateFiles(buildList);
+//generateFiles(buildList);
 
 function generateFiles(obj){
 	

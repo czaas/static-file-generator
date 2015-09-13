@@ -10,10 +10,17 @@
 		
 		<div class="pure-u-1-2">
 			<form action="/" id="file-generator" class="pure-form pure-form-stacked pure-1-2"> 
-				<input type="text" placeholder="Folder Name" name="folderName" class="pure-input-1">
-				<input type="text" placeholder="File names separated by a comma" class="pure-input-1">
-				<input type="text" placeholder="Desitnation where the folder will go" class="pure-input-1">
-				<input type="text" placeholder="Teamplate" class="pure-input-1"> 
+				<label>Folder Name</label>
+				<input type="text" placeholder="Folder Name" class="pure-input-1" id="folderName">
+				
+				<label>File names separated by a comma</label>
+				<input type="text" placeholder="about-us, contact, specials, surgeons" class="pure-input-1" id="fileNames">
+				
+				<label>Destination where the new folder will go</label>
+				<input type="text" placeholder="/mySite/static" class="pure-input-1" id="destination">
+				
+				<label>Template</label>
+				<input type="text" placeholder="/template.cshtml" class="pure-input-1" id="template"> 
 				<button>Generat Files</button>
 			</form>
 		</div>
@@ -21,16 +28,25 @@
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script>
+		// going to auto fill form for development
+		$('#folderName').val('MyParentTestFolder');
+		$('#fileNames').val('about-us, surgeons, contact, specials');
+		$('#template').val('template.cshtml');
+		$('#destination').val('static');
+	</script>
+	<script>
 		var _form = $('#file-generator'); 
 		_form.submit(function(e){
 			e.preventDefault();
 			
+			// need to do form validation
 			var obj = {};
-			obj.folderName = _form.folderName;
+			obj.folderName = $('#folderName').val();
+			obj.filesArray = $('#fileNames').val().split(','); // need to remove spaces from array.
+			obj.template = $('#template').val();
+			obj.destinationDir = $('#destination').val();
 			
-			console.log(_form);
-			
-			//console.log('Submited!');
+			console.log(obj);
 		})
 	</script>
 </body>
