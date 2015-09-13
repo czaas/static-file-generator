@@ -1,12 +1,12 @@
 'use strict';
-var fs = require('fs-extra');
+var fs = require('fs-extra'),
+	zipDir = require('zip-dir');
 
 // example
 var buildList = {
 	folderName: 'parent-folder', // This will create an index file by default
 	filesArray: ['index', 'about-us', 'surgeons', 'contact', 'specials'], // file names will be given the templates file extension
-	template: 'template.cshtml', // include directory and extension
-	destinationDir: 'static' // WARNING: this will overwrite files that exist
+	template: 'template.cshtml' // include directory and extension
 };
 
 //generateFiles(buildList);
@@ -15,15 +15,18 @@ function generateFiles(obj){
 	
 	fileArrayLoop(obj.filesArray, buildFile);
 	
+	zipDir('./zipped', { saveTo: './files.zip' }, function(err, buffer){
+		console.log('zipped');
+	});
+	
 	function buildFile(fileName){
 	
 		var folderName = obj.folderName;
 	
-		var dest = obj.destinationDir;
 		var template = obj.template;
 		var extension = '.' + template.split('.')[1];
 	
-		var newFile = dest + '/' + fileName + extension;
+		var newFile = 'zipped/' + fileName + extension;
 	
 		// template, directory + filename;
 		fs.copy(template, newFile, function(err){

@@ -12,9 +12,14 @@ app.get('/generate-files', function(req, res){
 });
 
 app.post('/generate-files', function(req, res){
-	//console.log(req.body);
+	
 	generateFiles(req.body);
+	
 	res.send('posting a file has been attempted.');
+});
+
+app.get('/files', function(req, res){
+	res.download('./files.zip');
 });
 
 var server = app.listen('9000', function(){

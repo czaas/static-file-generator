@@ -1,8 +1,7 @@
-<html><head><meta charset="UTF-8"><title>File Generator</title><link rel="stylesheet" href="/lib/pure-min.css"><link rel="stylesheet" href="/css/main.css"></head><body><div class="contentContainer" class="pure-g"><div class="pure-u-1-2"><form action="/" id="file-generator" class="pure-form pure-form-stacked pure-1-2"><label>Folder Name</label><input type="text" placeholder="Folder Name" class="pure-input-1" id="folderName"><label>File names separated by a comma</label><input type="text" placeholder="about-us, contact, specials, surgeons" class="pure-input-1" id="fileNames"><label>Destination where the new folder will go</label><input type="text" placeholder="/mySite/static" class="pure-input-1" id="destination"><label>Template</label><input type="text" placeholder="/template.cshtml" class="pure-input-1" id="template"> <button>Generat Files</button></form></div></div><script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script><script>// going to auto fill form for development
+<html><head><meta charset="UTF-8"><title>File Generator</title><link rel="stylesheet" href="/lib/pure-min.css"><link rel="stylesheet" href="/css/main.css"></head><body><div class="contentContainer" class="pure-g"><div class="pure-u-1-2"><form action="/" id="file-generator" class="pure-form pure-form-stacked pure-1-2"><label>Folder Name</label><input type="text" placeholder="Folder Name" class="pure-input-1" id="folderName"><label>File names separated by a comma</label><input type="text" placeholder="about-us, contact, specials, surgeons" class="pure-input-1" id="fileNames"><label>Template</label><input type="text" placeholder="/template.cshtml" class="pure-input-1" id="template"> <button>Generat Files</button></form></div></div><script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script><script>// going to auto fill form for development
 		$('#folderName').val('MyParentTestFolder');
 		$('#fileNames').val('about-us, surgeons, contact, specials');
-		$('#template').val('template.cshtml');
-		$('#destination').val('static');</script><script>var _form = $('#file-generator'); 
+		$('#template').val('template.cshtml');</script><script>var _form = $('#file-generator'); 
 		_form.submit(function(e){
 			e.preventDefault();
 			
@@ -10,16 +9,18 @@
 			obj.folderName = $('#folderName').val();
 			obj.filesArray = $('#fileNames').val().replace(/ /g,'').split(',');
 			obj.template = $('#template').val();
-			obj.destinationDir = $('#destination').val();
 			
 			$.ajax({
 				type: 'POST',
 				contentType: 'application/json',
 				data: JSON.stringify(obj),
-				url: 'http://localhost:9000/generate-files'	
-			}).done(function(res){
-				console.log(res);
+				url: 'http://localhost:9000/generate-files'
+			}).success(function(res){
+				var newLink = document.createElement('a');
+				newLink.setAttribute('href', 'http://localhost:9000/files');
+				newLink.setAttribute('target', '_blank');
+				
+				newLink.click();
 			});
-			
 			
 		});</script></body></html>
