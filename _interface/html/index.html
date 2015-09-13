@@ -24,7 +24,6 @@
 				<button>Generat Files</button>
 			</form>
 		</div>
-		
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script>
@@ -39,15 +38,22 @@
 		_form.submit(function(e){
 			e.preventDefault();
 			
-			// need to do form validation
 			var obj = {};
 			obj.folderName = $('#folderName').val();
-			obj.filesArray = $('#fileNames').val().split(','); // need to remove spaces from array.
+			obj.filesArray = $('#fileNames').val().replace(/ /g,'').split(',');
 			obj.template = $('#template').val();
 			obj.destinationDir = $('#destination').val();
 			
-			console.log(obj);
-		})
+			$.ajax({
+				type: 'POST',
+				data: JSON.stringify(obj),
+				url: 'http://localhost:9000/generate-files'	
+			}).done(function(res){
+				console.log(res);
+			});
+			
+			
+		});
 	</script>
 </body>
 </html>

@@ -20,8 +20,16 @@ gulp.task('html', function() {
 
 gulp.task('watch', function(){
 	bs.init({
-		server: './_interface/'	
+		server: {
+			baseDir: './_interface/',
+			middleware: function (req, res, next) {
+				res.setHeader('Access-Control-Allow-Origin', '*');
+				next();
+			}
+		}		
 	});
+	
+		
 	
 	gulp.watch('./_interface/scss/*.scss', ['css']);
 	//gulp.watch('/js/*.js', ['js']);

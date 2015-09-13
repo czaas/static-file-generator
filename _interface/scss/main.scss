@@ -1,1 +1,7 @@
 .contentContainer { width: 100%; max-width: 1024px; margin: 0 auto; padding: 20px 15px 30px; }
+form {
+	input { margin: 0 0 20px !important; border-radius: 0 !important; padding: 8px 12px !important; }
+	button { padding: 8px 12px; background: #003cff; color: #fff; outline: none; border: none; 
+		&:hover { background: #003cda; }
+	}
+}
