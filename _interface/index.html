@@ -14,6 +14,7 @@
 			
 			$.ajax({
 				type: 'POST',
+				contentType: 'application/json',
 				data: JSON.stringify(obj),
 				url: 'http://localhost:9000/generate-files'	
 			}).done(function(res){

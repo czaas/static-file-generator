@@ -6,7 +6,7 @@ var buildList = {
 	folderName: 'parent-folder', // This will create an index file by default
 	filesArray: ['index', 'about-us', 'surgeons', 'contact', 'specials'], // file names will be given the templates file extension
 	template: 'template.cshtml', // include directory and extension
-	destinationDir: 'static/' // WARNING: this will overwrite files that exist
+	destinationDir: 'static' // WARNING: this will overwrite files that exist
 };
 
 //generateFiles(buildList);
@@ -23,7 +23,7 @@ function generateFiles(obj){
 		var template = obj.template;
 		var extension = '.' + template.split('.')[1];
 	
-		var newFile = dest + fileName + extension;
+		var newFile = dest + '/' + fileName + extension;
 	
 		// template, directory + filename;
 		fs.copy(template, newFile, function(err){
@@ -51,3 +51,5 @@ function generateFiles(obj){
 		}
 	}
 }
+
+module.exports = generateFiles;
