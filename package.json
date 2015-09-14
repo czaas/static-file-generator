@@ -8,8 +8,11 @@
     "fs-extra": "^0.24.0"
   },
   "devDependencies": {
+    "body-parser": "^1.13.3",
     "browser-sync": "^2.9.3",
+    "cors": "^2.7.1",
     "gulp": "^3.9.0",
+    "gulp-html-minifier": "^0.1.6",
     "gulp-sass": "^2.0.4",
     "zip-dir": "^1.0.0"
   },
